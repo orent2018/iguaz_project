@@ -1,0 +1,38 @@
+---
+ - name: Installing Docker Prerequisites
+   yum:
+      name: "{{ item }}"
+      state: latest
+   with_items:
+      - yum-utils
+      - epel-release
+      - device-mapper-persistent-data
+      - lvm2
+
+ - name: Install docker-py
+   pip:
+     name: docker-py
+     state: latest
+
+ - name: Configuring docker-ce repo
+   get_url:
+       url: https://download.docker.com/linux/centos/docker-ce.repo
+       dest: /etc/yum.repos.d/docker-ce.repo
+       mode: 0644
+
+ - name: Installing docker latest version
+   yum:
+      name: docker-ce
+      state: present
+
+ - name: Starting and enabling the docker service
+   service:
+      name: docker
+      state: started
+      enabled: yes
+
+ - name: Run hello-world docker container
+   docker:
+      name: hello-world
+      image: hello-world
+      state: present

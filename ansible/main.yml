@@ -1,0 +1,11 @@
+---
+- hosts: app_servers
+  become: yes
+
+  vars_files:
+    - variables.yml
+
+  tasks:
+    - include_tasks: base.yml
+    - include_tasks: docker.yml
+    - include_tasks: go.yml

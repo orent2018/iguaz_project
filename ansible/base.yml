@@ -1,0 +1,28 @@
+---
+ - name: Install yum packages
+   yum:
+      name: "{{ item }}"
+      state: latest
+   with_items: "{{ yum_packages }}"
+
+ - name: Install pip
+   easy_install:
+     name: pip
+     state: latest
+
+ - name: Install Python packages
+   pip: 
+     name: "{{ item.name | default(item) }}"
+     version: "{{ item.version | default(omit) }}"
+   with_items: "{{ python_packages }}"
+
+ - name: Create files directory
+   file:
+     path: /etc/my_files
+     state: directory
+
+ - name: Copy template 
+   template: 
+      src: "{{ item }}"
+      dest: /etc/my_files/info.txt
+   with_items: "{{ files }}"

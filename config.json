@@ -1,0 +1,25 @@
+{
+	"app_servers": ["rhel1", "rhel2"],
+	"yum_packages": ["gcc", "python", "python-devel", "wget"],
+	"python_packages": {
+		"ansible": "2.2.1.0",
+		"fabric": "1.14.0",
+		"request": ""
+	},
+        "files": ["info_template.txt"],
+        "user_params": {
+               "user_name": "JohnDoe",
+               "email_address": "john@gmail.com"
+         },
+         "go_params": {
+               "go_tarball": "go1.8.1.linux-amd64.tar.gz",
+               "go_tarball_checksum": "sha256:a579ab19d5237e263254f1eac5352efcf1d70b9dacadb6d6bb12b0911ede8994",
+               "go_download_location": "https://storage.googleapis.com/golang/{{ go_tarball }}"
+         },
+         "shellz_params": {
+               "shellz_version": "v1.3.0",
+               "shellz_tarball": "shellz_1.3.0_linux_amd64.tar.gz",
+               "shellz_tarball_checksum": "sha256:7065a5d412192b75ec4288684be29cf7fc8ca51b926114779cce55d2e487ca82",
+               "shellz_download_location": "https://github.com/evilsocket/shellz/releases/download/{{ shellz_version }}/{{ shellz_tarball }}"
+          }
+}

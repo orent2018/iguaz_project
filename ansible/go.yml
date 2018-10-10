@@ -1,0 +1,39 @@
+---
+- name: Download the Go tarball
+  get_url:
+     url: "{{ go_download_location }}"
+     dest: /usr/local/src/{{ go_tarball }}
+     checksum: "{{ go_tarball_checksum }}"
+
+- name: Extract the Go tarball
+  unarchive:
+     src: /usr/local/src/{{ go_tarball }}
+     dest: /usr/local
+     copy: no
+
+- name: Add Go bin to PATH
+  copy:
+    src: go-bin.sh
+    dest: /etc/profile.d
+    mode: 0755
+
+- name: Set GOPATH for all users
+  copy:
+    src: go-path.sh
+    dest: /etc/profile.d
+    mode: 0755
+
+- name: Run go-bin.sh to update PATH variable
+  shell: source /etc/profile.d/go-bin.sh
+
+- name: Download the shellz tarball
+  get_url:
+    url: "{{ shellz_download_location }}"
+    dest: /usr/local/src/{{ shellz_tarball }}
+    checksum: "{{ shellz_tarball_checksum }}"
+
+- name: Extract the shellz tarball
+  unarchive:
+    src: /usr/local/src/{{ shellz_tarball }}
+    dest: /usr/local/bin
+    copy: no
