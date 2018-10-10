@@ -32,6 +32,7 @@
       - ansible version 2.5 and above
       - passwordless ssh into all servers in the app_servers server group
       - sudo priviledges for the user running the install script
+      - The automation was tested on RHEL7 and may not work on CENTOS
 
 
   Created: 09/10/2018
