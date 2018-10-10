@@ -23,9 +23,6 @@
     dest: /etc/profile.d
     mode: 0755
 
-- name: Run go-bin.sh to update PATH variable
-  shell: source /etc/profile.d/go-bin.sh
-
 - name: Download the shellz tarball
   get_url:
     url: "{{ shellz_download_location }}"
