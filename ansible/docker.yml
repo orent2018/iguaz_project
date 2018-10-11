@@ -32,7 +32,7 @@
       enabled: yes
 
  - name: Run hello-world docker container
-   docker:
+   docker_container:
       name: hello-world
       image: hello-world
       state: started
