@@ -25,6 +25,12 @@ config_file="config.json"
 inventory_file="/etc/ansible/hosts"
 ansible_var_file="ansible/variables.yml"
 
+# Functions
+# *********
+def populate_variables(var_group):
+    for key,val in config[var_group].items():
+      ansible_var.write(key+': '+val+'\n')
+   
 # import the config data from the config file to a dictionary object
 # ****************************************************************
 try:
@@ -81,14 +87,9 @@ if len(config['files']):             # Make sure that file list is not empty
 # Add key values including user,go and shellz to ansible variables file
 # *********************************************************************
   with open(ansible_var_file,'a') as ansible_var:
-    for key,val in config['user_params'].items():
-      ansible_var.write(key+': '+val+'\n')
-
-    for key,val in config['go_params'].items():
-      ansible_var.write(key+': '+val+'\n')
-
-    for key,val in config['shellz_params'].items():
-      ansible_var.write(key+': '+val+'\n')
+    populate_variables('user_params')
+    populate_variables('go_params')
+    populate_variables('shellz_params')
 
 # Run the ansible playbook
 # ************************
